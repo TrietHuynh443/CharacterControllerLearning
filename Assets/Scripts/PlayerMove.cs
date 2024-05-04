@@ -18,6 +18,8 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField] private BoxCollider2D footCollider;
 
+    private Animator _animator;
+
     // private CharacterController _characterController;
     private Rigidbody2D _rigidbody;
     // private BoxCollider2D _collider;
@@ -41,6 +43,7 @@ public class PlayerMove : MonoBehaviour
     {
         // _characterController = GetComponent<CharacterController>();
         _rigidbody = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
         // _collider = GetComponent<BoxCollider2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody.isKinematic = false;
@@ -56,9 +59,12 @@ public class PlayerMove : MonoBehaviour
         
         if (_horizontalInput != 0)
         {    _spriteRenderer.flipX = _horizontalInput < 0;
-              _direction.x = _horizontalInput*_speed*Time.deltaTime;
+              _direction.x = _horizontalInput*_speed;
+              _animator.SetBool("isWalking", true);
+              
         }
         else{
+            _animator.SetBool("isWalking", false);
              _direction.x = 0;
         }
          
@@ -71,16 +77,24 @@ public class PlayerMove : MonoBehaviour
         {
             
             _isJumping = true;
-        
+            // _animator.SetBool("isWalking", false);
+
+            _animator.SetBool("onGrounded", !_isJumping);
             _jumpCounter++;
             Debug.Log("jumpCounter value " + _jumpCounter);
+            _isCrounched = false;
         }
         if(Input.GetKey(KeyCode.DownArrow) && _isGrounded){
             _isCrounched = true;
+           
         }
         if(Input.GetKeyUp(KeyCode.DownArrow)){
+            
             _isCrounched = false;
+            
         }
+        // _animator.SetBool("is")
+         _animator.SetBool("isCrouching", _isCrounched);
     }
 
     // Update is called once per frame
@@ -144,6 +158,7 @@ public class PlayerMove : MonoBehaviour
             _startFloatingTime = 0f;
             _endfloatingTime = 0f;
             _isGrounded = true;
+            _animator.SetBool("onGrounded", true);
             _jumpCounter = 0;
         }
         Debug.Log("Floating time " + (_endfloatingTime - _startFloatingTime));
@@ -164,6 +179,7 @@ public class PlayerMove : MonoBehaviour
         // HandleGravity();
 
         _isJumping = false;
+        // _animator.SetBool("onGrounded", true);
 
     }
     private void HandleGravity()
