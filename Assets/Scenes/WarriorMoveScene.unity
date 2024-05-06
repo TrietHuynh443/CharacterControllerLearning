@@ -1769,11 +1769,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1673490720}
-  - component: {fileID: 1673490721}
   - component: {fileID: 1673490725}
   - component: {fileID: 1673490724}
   - component: {fileID: 1673490726}
   - component: {fileID: 1673490727}
+  - component: {fileID: 1673490728}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -1798,29 +1798,6 @@ Transform:
   - {fileID: 74620015}
   m_Father: {fileID: 722539726}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1673490721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1673490719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d63a6ac9f6f8840a876da2fba1e8fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 12
-  _jumpForce: 12
-  _gravity: 10
-  _gravityMultiplier: 3
-  rightKey: 275
-  leftKey: 276
-  jumpKey: 32
-  maxJumpCounter: 2
-  coyateTime: 1
-  groundDistance: 0.1
-  footCollider: {fileID: 90793174}
 --- !u!61 &1673490724
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1966,6 +1943,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1673490728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1673490719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce4c9a5369aeedd4199b4173fa5b1cd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  footCollider: {fileID: 90793174}
+  groundDistance: 0.1
 --- !u!1 &1916490881
 GameObject:
   m_ObjectHideFlags: 0
