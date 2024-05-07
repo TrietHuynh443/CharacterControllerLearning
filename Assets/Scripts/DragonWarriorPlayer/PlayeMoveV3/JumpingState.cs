@@ -77,6 +77,7 @@ public class JumpingState : IPlayerState
     public void StartJump(){
     
         // _startJumping = true;
+        _direction.y = -1;
          _direction += Vector2.up*_jumpForce;
          
         // _rigidbody.AddForce(_force, ForceMode2D.Impulse);

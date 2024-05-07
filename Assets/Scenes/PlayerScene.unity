@@ -167,8 +167,8 @@ GameObject:
   - component: {fileID: 622780457}
   - component: {fileID: 622780456}
   - component: {fileID: 622780455}
-  - component: {fileID: 622780454}
   - component: {fileID: 622780458}
+  - component: {fileID: 622780459}
   m_Layer: 3
   m_Name: PlayerSprite
   m_TagString: Untagged
@@ -191,20 +191,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1559948716}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &622780454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 622780452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 855da5acaa2753b4db9ed00cd8c2ad4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
-  runKey: 120
 --- !u!50 &622780455
 Rigidbody2D:
   serializedVersion: 4
@@ -350,6 +336,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &622780459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 622780452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dee298169f71408448ea6ab0a5c0e9d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 622780455}
+  _animator: {fileID: 622780458}
+  _speed: 10
 --- !u!1 &1559948715
 GameObject:
   m_ObjectHideFlags: 0

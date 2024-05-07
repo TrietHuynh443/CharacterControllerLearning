@@ -16,13 +16,13 @@ public class PlayerStateController : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField]private int jumpCounter = 2;
     [SerializeField] private float coyateTime = 1;
-    
     private IPlayerState currentState;
 
     private WalkingState walkingState;
     private JumpingState jumpingState;
 
     private float _horizontalInput;
+    
 
     // private bool _isJumping = false;
     private Rigidbody2D _rigidbody;
@@ -42,6 +42,8 @@ public class PlayerStateController : MonoBehaviour
        
         InputHandler();
         // currentState.Update();
+        floatingState.CheckGround(footCollider);
+
     }
     
     private void InputHandler()
@@ -75,7 +77,6 @@ public class PlayerStateController : MonoBehaviour
     
     void FixedUpdate()
     {
-        floatingState.CheckGround(footCollider);
         walkingState.FixedUpdate();
         // floatingState.FixedUpdate();
         jumpingState.FixedUpdate();
