@@ -40,6 +40,8 @@ public class WalkingState : IPlayerState
 
     public override void FixedUpdate()
     {
+        base.FixedUpdate();
+
         // throw new System.NotImplementedException();
         if(Mathf.Abs(_horizontalInput) >= 0.1f){
 

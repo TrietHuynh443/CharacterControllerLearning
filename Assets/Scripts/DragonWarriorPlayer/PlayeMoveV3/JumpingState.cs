@@ -37,6 +37,9 @@ public class JumpingState : IPlayerState
     {
         --_jumpCounter;
         _startJumping = true;
+        _animator.SetBool("isJumping", true);
+
+        
     }
 
     
@@ -53,7 +56,7 @@ public class JumpingState : IPlayerState
     {
         // Debug.Log("Fix update jump");
         // throw new System.NotImplementedException();
-
+        base.FixedUpdate();
         if(!_startJumping){
             if(!IsGrounded()){
                 _direction.y -= _rigidbody.gravityScale;
@@ -61,6 +64,7 @@ public class JumpingState : IPlayerState
             else{
                 ResetCounter();
                 _direction.y = 0;
+                _animator.SetBool("isJumping", false);
             }
         }
         else{

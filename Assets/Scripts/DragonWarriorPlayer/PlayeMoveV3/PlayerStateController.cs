@@ -28,6 +28,11 @@ public class PlayerStateController : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private FloatingState floatingState;
     
+    private AttackState attackState;
+    private Action _stateAction;
+
+    private bool _isDoing = false;
+    
     private void Start() {
         _rigidbody = GetComponent<Rigidbody2D>();
         Animator animator = GetComponent<Animator>();
@@ -35,28 +40,39 @@ public class PlayerStateController : MonoBehaviour
         walkingState = new WalkingState(_rigidbody, animator, renderer);
         jumpingState = new JumpingState(_rigidbody, animator, footCollider, jumpForce, jumpCounter);
         floatingState = new FloatingState(_rigidbody, animator);
+        attackState = new AttackState(_rigidbody, _animator);
+        currentState = walkingState;
     }
+
+    // Update is called once per frame
 
     void Update()
     {
-       
-        InputHandler();
+       if(!attackState.IsAttacking())
+            InputHandler();
         // currentState.Update();
         floatingState.CheckGround(footCollider);
+        currentState.Update();
 
     }
     
     private void InputHandler()
     {
+        
         _horizontalInput = Input.GetAxis("Horizontal");
+
         walkingState.SetInput(_horizontalInput, speed);
+        
+        currentState = walkingState;
         if(Input.GetKeyDown(KeyCode.Space)) {
            
             //firstjump
             if(IPlayerState.IsGrounded()){
                 Debug.Log("On ground");
                 jumpingState.SetJumpForce(jumpForce);
-
+                
+                currentState = jumpingState;
+                
                 jumpingState.EnterState();
 
             }
@@ -64,23 +80,33 @@ public class PlayerStateController : MonoBehaviour
                 Debug.Log("floating time: " + floatingState.GetFloatingTime() + " jump counter " + jumpingState.GetJumpCounter());
                 if(coyateTime > floatingState.GetFloatingTime() && jumpingState.GetJumpCounter() > 0){
                     jumpingState.SetJumpForce(jumpForce);
-
+                    currentState = jumpingState;
                     jumpingState.EnterState();
                 }
             }
         }
         
+        AttackInputHandler();
         
     }
 
-  
+    private void AttackInputHandler()
+    {
+        if(Input.GetKeyDown(KeyCode.Z)){
+            currentState = attackState;
+            attackState.EnterState();
+        }
+    }
+
     
+
     void FixedUpdate()
     {
-        walkingState.FixedUpdate();
+        currentState.FixedUpdate();
         // floatingState.FixedUpdate();
         jumpingState.FixedUpdate();
-
+        
+        
     }
 }
 
